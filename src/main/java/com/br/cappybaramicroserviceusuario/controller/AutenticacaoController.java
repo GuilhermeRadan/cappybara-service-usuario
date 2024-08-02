@@ -22,6 +22,8 @@ public class AutenticacaoController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public String login(@RequestBody  AuthDTO authDTO){
+        var autenticcaoUsuario = new UsernamePasswordAuthenticationToken(authDTO.getEmail(), authDTO.getSenha());
+        authenticationManager.authenticate(autenticcaoUsuario);
         return autenticacaoService.obterToken(authDTO);
     }
     @CrossOrigin("*")
